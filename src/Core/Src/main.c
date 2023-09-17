@@ -26,6 +26,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "logging.h"
 
 /* USER CODE END Includes */
 
@@ -36,6 +37,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+LOG_MODULE("MAIN", LOG_LEVEL_DEFAULT);
 
 /* USER CODE END PD */
 
@@ -208,6 +210,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
+  LOG_ERR("HAL error");
   /* User can add his own implementation to report the HAL error return state */
   __disable_irq();
   while (1)
@@ -227,8 +230,7 @@ void Error_Handler(void)
 void assert_failed(uint8_t *file, uint32_t line)
 {
   /* USER CODE BEGIN 6 */
-  /* User can add his own implementation to report the file name and line number,
-     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+  LOG_WRN("Assertion failed on line %d of %s", line, (char *)file);
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */

@@ -25,6 +25,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "logging.h"
 
 /* USER CODE END Includes */
 
@@ -36,6 +37,7 @@ typedef StaticTask_t osStaticThreadDef_t;
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+LOG_MODULE("FreeRTOS", LOG_LEVEL_DEBUG);
 
 /* USER CODE END PD */
 
@@ -98,6 +100,8 @@ void vApplicationStackOverflowHook(xTaskHandle xTask, signed char *pcTaskName)
    /* Run time stack overflow checking is performed if
    configCHECK_FOR_STACK_OVERFLOW is defined to 1 or 2. This hook function is
    called if a stack overflow is detected. */
+
+   LOG_ERR("Stack overflow detected in %s", pcTaskName);
 }
 /* USER CODE END 4 */
 
@@ -156,6 +160,7 @@ void StartDefaultTask(void *argument)
   {
     osDelay(1000);
     HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
+    LOG_DBG("LD1 Pin state %d", HAL_GPIO_ReadPin(LD1_GPIO_Port, LD1_Pin));
   }
   /* USER CODE END StartDefaultTask */
 }
