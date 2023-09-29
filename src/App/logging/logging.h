@@ -92,37 +92,37 @@
 #endif
 
 /* Logging macro's */
-#define LOG_ERR(format, ...)    \
+#define LOG_ERR(format, ...) do {   \
         if(MIN(LOG_LEVEL_MAX, MAX(log_module_level, LOG_LEVEL_MIN)) >= LOG_LEVEL_ERROR) {\
             DPRINTF(ERR_COLOR); \
             LOG_TICK(); \
             DPRINTF("[%s] ERROR: " format, log_module_name, ##__VA_ARGS__); \
             DPRINTF(COLOR_RESET); \
             LOG(); \
-        }
+        } } while(0)
 
-#define LOG_WRN(format, ...)    \
+#define LOG_WRN(format, ...) do {   \
         if(MIN(LOG_LEVEL_MAX, MAX(log_module_level, LOG_LEVEL_MIN)) >= LOG_LEVEL_WARNING) { \
             DPRINTF(WRN_COLOR); \
             LOG_TICK(); \
             DPRINTF("[%s] WARNING: " format, log_module_name, ##__VA_ARGS__); \
             DPRINTF(COLOR_RESET); \
             LOG(); \
-        }
+        } } while(0)
 
-#define LOG_INF(format, ...)    \
+#define LOG_INF(format, ...) do {   \
         if(MIN(LOG_LEVEL_MAX, MAX(log_module_level, LOG_LEVEL_MIN)) >= LOG_LEVEL_INFO) { \
             LOG_TICK(); \
             DPRINTF("[%s] INFO: " format, log_module_name, ##__VA_ARGS__); \
             LOG(); \
-        }
+        } } while(0)
 
-#define LOG_DBG(format, ...)    \
+#define LOG_DBG(format, ...) do {   \
         if(MIN(LOG_LEVEL_MAX, MAX(log_module_level, LOG_LEVEL_MIN)) >= LOG_LEVEL_DEBUG) { \
             LOG_TICK(); \
             DPRINTF("[%s] DEBUG: " format, log_module_name, ##__VA_ARGS__); \
             LOG(); \
-        }
+        } } while(0)
 
 /*------------------------------------------------------------------------------------------------*/
 /* Global variables                                                                               */
